@@ -1,0 +1,312 @@
+##############################################
+验证用户输入
+AngularJS 实例
+<form ng-app="" name="myForm">
+    Email:
+    <input type="email" name="myAddress" ng-model="text">
+    <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+</form>
+##############################################
+应用状态
+ng-model 指令可以为应用数据提供状态值(invalid, dirty, touched, error):
+AngularJS 实例
+<form ng-app="" name="myForm" ng-init="myText = 'test@runoob.com'">
+    Email:
+    <input type="email" name="myAddress" ng-model="myText" required></p>
+    <h1>状态</h1>
+    {{myForm.myAddress.$valid}}
+    {{myForm.myAddress.$dirty}}
+    {{myForm.myAddress.$touched}}
+</form>
+状态
+Valid: true (如果输入的值是合法的则为 true)。
+Dirty: false (如果值改变则为 true)。
+Touched: false (如果通过触屏点击则为 true)。
+##############################################
+AngularJS 过滤器
+AngularJS 过滤器可用于转换数据：
+过滤器	描述
+currency	格式化数字为货币格式。
+filter	从数组项中选择一个子集。
+lowercase	格式化字符串为小写。
+orderBy	根据某个表达式排列数组。
+uppercase	格式化字符串为大写。
+
+过滤输入
+输入过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中，该过滤器后跟一个冒号和一个模型名称。
+filter 过滤器从数组中选择一个子集：
+AngularJS 实例
+<div ng-app="myApp" ng-controller="namesCtrl">
+
+<p><input type="text" ng-model="test"></p>
+
+<ul>
+  <li ng-repeat="x in names | filter:test | orderBy:'country'">
+    {{ (x.name | uppercase) + ', ' + x.country }}
+  </li>
+</ul>
+
+</div>
+##############################################
+$location.absUrl()
+$http 
+$timeout
+$interval 
+###############################################
+使用 ng-options 创建选择框
+在 AngularJS 中我们可以使用 ng-option 指令来创建一个下拉列表，列表项通过对象和数组循环输出，如下实例:
+实例
+<div ng-app="myApp" ng-controller="myCtrl">
+<select ng-model="selectedName" ng-options="x for x in names">
+</select>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.names = ["Google", "Runoob", "Taobao"];
+});
+</script>
+#################################################
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+#################################################
+使用 orderBy 过滤器
+排序显示，可以使用 orderBy 过滤器: 
+AngularJS 实例
+<table>
+  <tr ng-repeat="x in names | orderBy : 'Country'">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country }}</td>
+  </tr>
+</table>
+使用 uppercase 过滤器
+使用 uppercase 过滤器转换为大写: 
+AngularJS 实例
+<table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country | uppercase }}</td>
+  </tr>
+</table>
+#######################################
+使用 $even 和 $odd
+AngularJS 实例
+<table>
+<tr ng-repeat="x in names">
+<td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Name }}</td>
+<td ng-if="$even">{{ x.Name }}</td>
+<td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Country }}</td>
+<td ng-if="$even">{{ x.Country }}</td>
+</tr>
+</table>
+#################################################
+跨域 HTTP 请求
+如果你需要从不同的服务器（不同域名）上获取数据就需要使用跨域 HTTP 请求。
+跨域请求在网页上非常常见。很多网页从不同服务器上载入 CSS, 图片，Js脚本等。
+在现代浏览器中，为了数据的安全，所有请求被严格限制在同一域名下，如果需要调用不同站点的数据，需要通过跨域来解决。
+以下的 PHP 代码运行使用的网站进行跨域访问。
+header("Access-Control-Allow-Origin: *");
+########################################################################################
+$dirty	表单有填写记录
+$valid	字段内容合法的
+$invalid	字段内容是非法的
+$pristine	表单没有填写记录
+
+API	描述
+angular.lowercase()	转换字符串为小写
+angular.uppercase()	转换字符串为大写
+angular.isString()	判断给定的对象是否为字符串，如果是返回 true。
+angular.isNumber()	判断给定的对象是否为数字，如果是返回 true。
+#######################################
+AngularJS 动画
+AngularJS 提供了动画效果，可以配合 CSS 使用。
+AngularJS 使用动画需要引入 angular-animate.min.js 库。
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+
+ngAnimate 做了什么?
+ngAnimate 模型可以添加或移除 class 。
+ngAnimate 模型并不能使 HTML 元素产生动画，但是 ngAnimate 会监测事件，类似隐藏显示 HTML 元素 ，如果事件发生 ngAnimate 就会使用预定义的 class 来设置 HTML 元素的动画。
+AngularJS 添加/移除 class 的指令:
+ng-show
+ng-hide
+ng-class
+ng-view
+ng-include
+ng-repeat
+ng-if
+ng-switch
+ng-show 和 ng-hide 指令用于添加或移除 ng-hide class 的值。
+其他指令会在进入 DOM 会添加 ng-enter 类，移除 DOM 会添加 ng-leave 属性。
+当 HTML 元素位置改变时，ng-repeat 指令同样可以添加 ng-move 类 。
+此外， 在动画完成后，HTML 元素的类集合将被移除。例如： ng-hide 指令会添加一下类：
+ng-animate
+ng-hide-animate
+ng-hide-add (如果元素将被隐藏)
+ng-hide-remove (如果元素将显示)
+ng-hide-add-active (如果元素将隐藏)
+ng-hide-remove-active (如果元素将显示)
+
+#################################################
+ <div ng-view></div>
+        <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+        <script>
+            angular.module('routingDemoApp',['ngRoute'])
+            .config(['$routeProvider', function($routeProvider){
+                $routeProvider
+                .when('/',{template:'这是首页页面'})
+                .when('/computers',{template:'这是电脑分类页面'})
+                .when('/printers',{template:'这是打印机页面'})
+                .otherwise({redirectTo:'/'});
+            }]);
+        </script>
+#######################################
+路由设置对象
+AngularJS 路由也可以通过不同的模板来实现。
+$routeProvider.when 函数的第一个参数是 URL 或者 URL 正则规则，第二个参数为路由配置对象。
+路由配置对象语法规则如下：
+$routeProvider.when(url, {
+    template: string,
+    templateUrl: string,
+    controller: string, function 或 array,
+    controllerAs: string,
+    redirectTo: string, function,
+    resolve: object<key, function>
+});
+参数说明：
+template:
+如果我们只需要在 ng-view 中插入简单的 HTML 内容，则使用该参数：
+.when('/computers',{template:'这是电脑分类页面'})
+templateUrl:
+如果我们只需要在 ng-view 中插入 HTML 模板文件，则使用该参数：
+$routeProvider.when('/computers', {
+    templateUrl: 'views/computers.html',
+});
+以上代码会从服务端获取 views/computers.html 文件内容插入到 ng-view 中。
+controller:
+function、string或数组类型，在当前模板上执行的controller函数，生成新的scope。
+controllerAs:
+string类型，为controller指定别名。
+redirectTo:
+重定向的地址。
+resolve:
+指定当前controller所依赖的其他模块。
+#################################################
+AngularJS 指令
+本教程用到的 AngularJS 指令 :
+指令	描述
+ng-app	定义应用程序的根元素。
+ng-bind	绑定 HTML 元素到应用程序数据
+ng-bind-html	绑定 HTML 元素的 innerHTML 到应用程序数据，并移除 HTML 字符串中危险字符
+ng-bind-template	规定要使用模板替换的文本内容
+ng-blur	规定 blur 事件的行为
+ng-change	规定在内容改变时要执行的表达式
+ng-checked	规定元素是否被选中
+ng-class	指定 HTML 元素使用的 CSS 类
+ng-class-even	类似 ng-class，但只在偶数行起作用
+ng-class-odd	类似 ng-class，但只在奇数行起作用
+ng-click	定义元素被点击时的行为
+ng-cloak	在应用正要加载时防止其闪烁
+ng-controller	定义应用的控制器对象
+ng-copy	规定拷贝事件的行为
+ng-csp	修改内容的安全策略
+ng-cut	规定剪切事件的行为
+ng-dblclick	规定双击事件的行为
+ng-disabled	规定一个元素是否被禁用
+ng-focus	规定聚焦事件的行为
+ng-form	指定 HTML 表单继承控制器表单
+ng-hide	隐藏或显示 HTML 元素
+ng-href	为 the <a> 元素指定链接
+ng-if	如果条件为 false 移除 HTML 元素
+ng-include	在应用中包含 HTML 文件
+ng-init	定义应用的初始化值
+ng-jq	定义应用必须使用到的库，如：jQuery
+ng-keydown	规定按下按键事件的行为
+ng-keypress	规定按下按键事件的行为
+ng-keyup	规定松开按键事件的行为
+ng-list	将文本转换为列表 (数组)
+ng-model	绑定 HTML 控制器的值到应用数据
+ng-model-options	规定如何更新模型
+ng-mousedown	规定按下鼠标按键时的行为
+ng-mouseenter	规定鼠标指针穿过元素时的行为
+ng-mouseleave	规定鼠标指针离开元素时的行为
+ng-mousemove	规定鼠标指针在指定的元素中移动时的行为
+ng-mouseover	规定鼠标指针位于元素上方时的行为
+ng-mouseup	规定当在元素上松开鼠标按钮时的行为
+ng-non-bindable	规定元素或子元素不能绑定数据
+ng-open	指定元素的 open 属性
+ng-options	在 <select> 列表中指定 <options>
+ng-paste	规定粘贴事件的行为
+ng-pluralize	根据本地化规则显示信息
+ng-readonly	指定元素的 readonly 属性
+ng-repeat	定义集合中每项数据的模板
+ng-selected	指定元素的 selected 属性
+ng-show	显示或隐藏 HTML 元素
+ng-src	指定 <img> 元素的 src 属性
+ng-srcset	指定 <img> 元素的 srcset 属性
+ng-style	指定元素的 style 属性
+ng-submit	规定 onsubmit 事件发生时执行的表达式
+ng-switch	规定显示或隐藏子元素的条件
+ng-transclude	规定填充的目标位置
+ng-value	规定 input 元素的值
+过滤器解析 AngularJs 过滤器。
+#######################################
+AngularJS 事件
+AngularJS 支持以下事件:
+ng-click
+ng-dbl-click
+ng-mousedown
+ng-mouseenter
+ng-mouseleave
+ng-mousemove
+ng-keydown
+ng-keyup
+ng-keypress
+ng-change
+事件解析： Angular 事件。
+AngularJS 验证属性
+$dirty
+$invalid
+$error
+验证解析：Angular 验证。
+AngularJS 全局 API
+转换
+API	描述
+angular.lowercase()	将字符串转换为小写
+angular.uppercase()	将字符串转换为大写
+angular.copy()	数组或对象深度拷贝
+angular.forEach()	对象或数组的迭代函数
+比较
+API	描述
+angular.isArray()	如果引用的是数组返回 true
+angular.isDate()	如果引用的是日期返回 true
+angular.isDefined()	如果引用的已定义返回 true
+angular.isElement()	如果引用的是 DOM 元素返回 true
+angular.isFunction()	如果引用的是函数返回 true
+angular.isNumber()	如果引用的是数字返回 true
+angular.isObject()	如果引用的是对象返回 true
+angular.isString()	如果引用的是字符串返回 true
+angular.isUndefined()	如果引用的未定义返回 true
+angular.equals()	如果两个对象相等返回 true
+JSON
+API	描述
+angular.fromJson()	反序列化 JSON 字符串
+angular.toJson()	序列化 JSON 字符串
+基础
+API	描述
+angular.bootstrap()	手动启动 AngularJS
+angular.element()	包裹着一部分DOM element或者是HTML字符串，把它作为一个jQuery元素来处理。
+angular.module()	创建，注册或检索 AngularJS 模块
+全局 API 解析 ：Angular API。
+#################################################
