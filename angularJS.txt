@@ -5,3 +5,44 @@ AngularJS 实例
     <input type="email" name="myAddress" ng-model="text">
     <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
 </form>
+
+应用状态
+ng-model 指令可以为应用数据提供状态值(invalid, dirty, touched, error):
+AngularJS 实例
+<form ng-app="" name="myForm" ng-init="myText = 'test@runoob.com'">
+    Email:
+    <input type="email" name="myAddress" ng-model="myText" required></p>
+    <h1>状态</h1>
+    {{myForm.myAddress.$valid}}
+    {{myForm.myAddress.$dirty}}
+    {{myForm.myAddress.$touched}}
+</form>
+状态
+Valid: true (如果输入的值是合法的则为 true)。
+Dirty: false (如果值改变则为 true)。
+Touched: false (如果通过触屏点击则为 true)。
+
+AngularJS 过滤器
+AngularJS 过滤器可用于转换数据：
+过滤器	描述
+currency	格式化数字为货币格式。
+filter	从数组项中选择一个子集。
+lowercase	格式化字符串为小写。
+orderBy	根据某个表达式排列数组。
+uppercase	格式化字符串为大写。
+
+过滤输入
+输入过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中，该过滤器后跟一个冒号和一个模型名称。
+filter 过滤器从数组中选择一个子集：
+AngularJS 实例
+<div ng-app="myApp" ng-controller="namesCtrl">
+
+<p><input type="text" ng-model="test"></p>
+
+<ul>
+  <li ng-repeat="x in names | filter:test | orderBy:'country'">
+    {{ (x.name | uppercase) + ', ' + x.country }}
+  </li>
+</ul>
+
+</div>
