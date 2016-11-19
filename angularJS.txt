@@ -1,3 +1,4 @@
+##############################################
 验证用户输入
 AngularJS 实例
 <form ng-app="" name="myForm">
@@ -5,7 +6,7 @@ AngularJS 实例
     <input type="email" name="myAddress" ng-model="text">
     <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
 </form>
-
+##############################################
 应用状态
 ng-model 指令可以为应用数据提供状态值(invalid, dirty, touched, error):
 AngularJS 实例
@@ -21,7 +22,7 @@ AngularJS 实例
 Valid: true (如果输入的值是合法的则为 true)。
 Dirty: false (如果值改变则为 true)。
 Touched: false (如果通过触屏点击则为 true)。
-
+##############################################
 AngularJS 过滤器
 AngularJS 过滤器可用于转换数据：
 过滤器	描述
@@ -46,3 +47,98 @@ AngularJS 实例
 </ul>
 
 </div>
+##############################################
+$location.absUrl()
+$http 
+$timeout
+$interval 
+###############################################
+使用 ng-options 创建选择框
+在 AngularJS 中我们可以使用 ng-option 指令来创建一个下拉列表，列表项通过对象和数组循环输出，如下实例:
+实例
+<div ng-app="myApp" ng-controller="myCtrl">
+<select ng-model="selectedName" ng-options="x for x in names">
+</select>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.names = ["Google", "Runoob", "Taobao"];
+});
+</script>
+#################################################
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+#################################################
+使用 orderBy 过滤器
+排序显示，可以使用 orderBy 过滤器: 
+AngularJS 实例
+<table>
+  <tr ng-repeat="x in names | orderBy : 'Country'">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country }}</td>
+  </tr>
+</table>
+使用 uppercase 过滤器
+使用 uppercase 过滤器转换为大写: 
+AngularJS 实例
+<table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country | uppercase }}</td>
+  </tr>
+</table>
+#######################################
+使用 $even 和 $odd
+AngularJS 实例
+<table>
+<tr ng-repeat="x in names">
+<td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Name }}</td>
+<td ng-if="$even">{{ x.Name }}</td>
+<td ng-if="$odd" style="background-color:#f1f1f1">{{ x.Country }}</td>
+<td ng-if="$even">{{ x.Country }}</td>
+</tr>
+</table>
+#################################################
+跨域 HTTP 请求
+如果你需要从不同的服务器（不同域名）上获取数据就需要使用跨域 HTTP 请求。
+跨域请求在网页上非常常见。很多网页从不同服务器上载入 CSS, 图片，Js脚本等。
+在现代浏览器中，为了数据的安全，所有请求被严格限制在同一域名下，如果需要调用不同站点的数据，需要通过跨域来解决。
+以下的 PHP 代码运行使用的网站进行跨域访问。
+header("Access-Control-Allow-Origin: *");
+########################################################################################
+#######################################
+#################################################
+#######################################
+#################################################
+#######################################
+#################################################
+#######################################
+#################################################
+#######################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
